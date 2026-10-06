@@ -22,7 +22,7 @@ void Vector2D::normalize() {
 bool Vector2D::equals(const Vector2D &rhs, float tolerance) const noexcept {
   const Vector2D dist_vec = *this - rhs;
 
-  if (dist_vec.x < tolerance && dist_vec.y < tolerance)
+  if (std::abs(dist_vec.x) < tolerance && std::abs(dist_vec.y) < tolerance)
     return true;
   else
     return false;
@@ -64,7 +64,7 @@ Vector2D &Vector2D::operator*=(float scalar) noexcept {
 }
 
 Vector2D &Vector2D::operator/=(float scalar) {
-  *this = *this * scalar;
+  *this = *this / scalar;
   return *this;
 }
 
