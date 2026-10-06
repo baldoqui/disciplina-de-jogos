@@ -1,0 +1,31 @@
+TRANSFORM2D.CPP - DESCRIÇÃO DA IMPLEMENTAÇÃO
+============================================
+
+A classe Transform2D representa uma transformação afim 2D (translação,
+rotação, escala e suas combinações) usando uma matriz 3x3 de float.
+
+  - Armazenamento row-major: m[linha][coluna].
+  - Vetores são vetores-linha: v * M.
+  - Um ponto é [x, y, 1] e uma direção é [x, y, 0].
+  - A translação fica na terceira linha: m[2][0] = tx e m[2][1] = ty.
+
+A matriz é inicializada como identidade na declaração do membro m.
+
+translation(tx, ty): identidade com m[2][0] = tx e m[2][1] = ty.
+
+rotation(ângulo): identidade com m[0][0] = cos, m[0][1] = sin,
+m[1][0] = -sin e m[1][1] = cos.
+
+scale(sx, sy): identidade com m[0][0] = sx e m[1][1] = sy.
+
+operator*: multiplicação de matrizes com dois laços (linha e coluna), somando
+os três produtos de cada posição em uma matriz nova. A * B aplica A primeiro
+e depois B.
+
+operator*=: *this = *this * rhs e retorna *this.
+
+transform_point(p): multiplica [p.x, p.y, 1] pela matriz, então a translação
+é somada.
+
+transform_vector(d): multiplica [d.x, d.y, 0] pela matriz, então a translação
+é ignorada.

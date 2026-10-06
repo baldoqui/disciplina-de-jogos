@@ -1,0 +1,21 @@
+VECTOR2D.CPP - DESCRIÇÃO DA IMPLEMENTAÇÃO
+=========================================
+
+normalized(): divide x e y pelo comprimento. Se o comprimento for <= EPSILON,
+lança std::invalid_argument.
+
+normalize(): chama normalized() e copia o resultado para x e y.
+
+equals(): calcula a diferença entre os vetores e retorna true se o módulo
+(std::abs) de cada componente for menor que a tolerância.
+
+Operadores +, - e * (escalar): retornam um novo vetor, componente a
+componente.
+
+Operador / (escalar): lança std::invalid_argument se |escalar| <= EPSILON;
+senão divide cada componente.
+
+Operadores +=, -=, *= e /=: usam o operador simples correspondente
+(ex.: *this = *this + rhs) e retornam *this.
+
+escalar * vetor: função livre que retorna vec * scalar.
