@@ -27,36 +27,39 @@
  */
 class Transform2D {
 public:
-  /// Row-major storage, m[row][col]. Defaults to the identity.
-  float m[3][3]{{1.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f}, {0.0f, 0.0f, 1.0f}};
+    /// Row-major storage, m[row][col]. Defaults to the identity.
+    float m[3][3]{
+        {1.0f, 0.0f, 0.0f},
+        {0.0f, 1.0f, 0.0f},
+        {0.0f, 0.0f, 1.0f}
+    };
 
-  /// Constructs the identity transform.
-  Transform2D() noexcept = default;
+    /// Constructs the identity transform.
+    Transform2D() noexcept = default;
 
-  // --- Factories ---------------------------------------------------------
-  [[nodiscard]] static Transform2D translation(float tx, float ty) noexcept;
-  [[nodiscard]] static Transform2D rotation(float angle_rad) noexcept;
-  [[nodiscard]] static Transform2D scale(float sx, float sy) noexcept;
+    // --- Factories ---------------------------------------------------------
+    [[nodiscard]] static Transform2D translation(float tx, float ty) noexcept;   
+    [[nodiscard]] static Transform2D rotation(float angle_rad) noexcept;
+    [[nodiscard]] static Transform2D scale(float sx, float sy) noexcept;
 
-  /**
-   * @brief Matrix product.
-   * @return The transform equivalent to applying *this FIRST, then rhs.
-   */
-  [[nodiscard]] Transform2D operator*(const Transform2D &rhs) const noexcept;
-  Transform2D &operator*=(const Transform2D &rhs) noexcept;
+    /**
+     * @brief Matrix product.
+     * @return The transform equivalent to applying *this FIRST, then rhs.
+     */
+    [[nodiscard]] Transform2D operator*(const Transform2D& rhs) const noexcept;
+    Transform2D& operator*=(const Transform2D& rhs) noexcept;
 
-  /**
-   * @brief Transforms a POINT (w = 1): translation IS applied.
-   * @return [p.x, p.y, 1] * M.
-   */
-  [[nodiscard]] Vector2D transform_point(const Vector2D &point) const noexcept;
+    /**
+     * @brief Transforms a POINT (w = 1): translation IS applied.
+     * @return [p.x, p.y, 1] * M.
+     */
+    [[nodiscard]] Vector2D transform_point(const Vector2D& point) const noexcept;
 
-  /**
-   * @brief Transforms a DIRECTION (w = 0): translation is NOT applied.
-   * @return [d.x, d.y, 0] * M (third row ignored).
-   */
-  [[nodiscard]] Vector2D
-  transform_vector(const Vector2D &direction) const noexcept;
+    /**
+     * @brief Transforms a DIRECTION (w = 0): translation is NOT applied.
+     * @return [d.x, d.y, 0] * M (third row ignored).
+     */
+    [[nodiscard]] Vector2D transform_vector(const Vector2D& direction) const noexcept;
 };
 
 #endif // GAME_TRANSFORM2D_HPP
