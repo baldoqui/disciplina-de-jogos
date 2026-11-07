@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(GTest REQUIRED)
 
-set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../src)
+set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../source)
 
 add_executable(tests
   Vector2DTest.cpp
