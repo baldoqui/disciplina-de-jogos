@@ -1,0 +1,9 @@
+COLLISION2D.CPP - DESCRIÇÃO DA IMPLEMENTAÇÃO
+============================================
+
+AABB::intersects(): teste de sobreposição em cada eixo. Duas caixas se
+sobrepõem quando, nos dois eixos, o mínimo de uma é <= máximo da outra e
+vice-versa. Usa <= e >=, então bordas que apenas se tocam contam como colisão.
+
+Collision2D::bounds(): monta a AABB em coordenadas de mundo centrada na
+posição recebida: { posição - halfExtents , posição + halfExtents }.

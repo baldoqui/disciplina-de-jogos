@@ -1,0 +1,26 @@
+TILEMAP.CPP - DESCRIÇÃO DA IMPLEMENTAÇÃO
+========================================
+
+Matriz guardada em std::vector<int>, row-major (índice = row * width + col).
+
+loadFromDungeon(): dimensiona a matriz com o tamanho da masmorra, preenche
+tudo com WALL_TILE e depois "escava" EMPTY_TILE nas salas das folhas da
+árvore BSP (percurso recursivo) e em todos os corredores. Os retângulos são
+recortados aos limites da matriz.
+
+saveCSV(): escreve uma linha por linha da matriz, valores separados por
+vírgula, sem vírgula no final.
+
+loadCSV(): lê linha a linha e valida tudo antes de alterar o mapa: cada
+campo tem que ser um inteiro completo, nenhuma linha pode terminar em
+vírgula e todas as linhas precisam ter a mesma largura. Se algo falhar
+retorna false e o mapa fica como estava.
+
+at()/isWall(): acesso à célula (assert para índices fora do intervalo).
+
+toIndices(): col = floor(x / TILE_SIZE), row = floor(y / TILE_SIZE).
+toWorld(): centro da célula = ((col + 0.5) * TILE_SIZE, (row + 0.5) * TILE_SIZE).
+
+randomEmptyCell(): conta as células vazias, sorteia um número entre 0 e
+total-1 e percorre a matriz até chegar à célula sorteada (distribuição
+uniforme). Lança std::logic_error se não houver célula vazia.

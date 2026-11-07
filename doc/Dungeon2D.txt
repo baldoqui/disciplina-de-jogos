@@ -1,0 +1,24 @@
+DUNGEON2D.CPP - DESCRIÇÃO DA IMPLEMENTAÇÃO
+==========================================
+
+Convenção: os limites de um Rect são INCLUSIVOS (left..right, top..bottom).
+
+Construtor: guarda largura e altura; lança std::invalid_argument se algum
+lado for menor que 5 (tamanho mínimo de sala).
+
+generate(seed): usa std::mt19937 com a semente, então a mesma semente gera
+sempre a mesma masmorra. Três etapas:
+
+1) split (BSP): divide recursivamente a região. Uma região só pode ser
+   cortada num eixo se tiver pelo menos 2 * 7 tiles nele (sala mínima 5 + 1
+   de borda de cada lado). Prefere cortar o lado mais comprido para evitar
+   regiões finas. Regiões pequenas (<= 24) às vezes param de dividir de
+   propósito, para variar o tamanho das salas.
+
+2) carveRooms: em cada folha escolhe uma sala aleatória de pelo menos 5x5,
+   deixando 1 tile de parede entre a sala e a borda da região.
+
+3) connect: para cada nó interno, procura o par de salas mais próximas
+   (distância entre centros) entre a subárvore esquerda e a direita e liga
+   as duas com um corredor em L de 3 tiles de largura. Como cada subárvore já
+   está conectada (indução), a masmorra inteira fica conectada.

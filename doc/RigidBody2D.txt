@@ -1,0 +1,7 @@
+RIGIDBODY2D.CPP - DESCRIÇÃO DA IMPLEMENTAÇÃO
+============================================
+
+integrate(dt): Euler semi-implícito (simplético). Primeiro atualiza a
+velocidade (velocity += acceleration * dt) e depois a posição usando a
+velocidade JÁ atualizada (position += velocity * dt). Essa ordem é o que
+diferencia do Euler explícito e deixa a simulação mais estável com passo fixo.

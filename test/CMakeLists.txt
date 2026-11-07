@@ -13,8 +13,16 @@ set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../src)
 add_executable(tests
   Vector2DTest.cpp
   Transform2DTest.cpp
+  Collision2DTest.cpp
+  RigidBody2DTest.cpp
+  Dungeon2DTest.cpp
+  TileMapTest.cpp
   ${SRC_DIR}/Vector2D.cpp
   ${SRC_DIR}/Transform2D.cpp
+  ${SRC_DIR}/Collision2D.cpp
+  ${SRC_DIR}/RigidBody2D.cpp
+  ${SRC_DIR}/Dungeon2D.cpp
+  ${SRC_DIR}/TileMap.cpp
 )
 target_include_directories(tests PRIVATE ${SRC_DIR})
 target_compile_options(tests PRIVATE -Wall -Wextra -Wpedantic)
