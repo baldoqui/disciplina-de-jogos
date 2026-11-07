@@ -1,0 +1,28 @@
+PATHFIND.CPP - DESCRIÇÃO DA IMPLEMENTAÇÃO
+=========================================
+
+A* sobre a matriz de tiles (row-major), 8-conectividade.
+
+1) Converte início e fim de pixels para célula: col = floor(x / TILE_SIZE),
+   row = floor(y / TILE_SIZE). Se algum dos dois estiver fora da matriz ou em
+   parede, retorna vetor vazio.
+
+2) Custos: passo ortogonal = 1, diagonal = raiz de 2.
+   Heurística h(): distância octil, max(dx,dy) + (raiz2 - 1) * min(dx,dy).
+   Ela é o custo exato num grid vazio, então nunca superestima (admissível)
+   e o A* devolve o caminho mais curto.
+   f() = g() + h(), onde g() é o custo acumulado desde o início.
+
+3) Lista aberta: std::priority_queue ordenada pelo menor f. Em vez de
+   atualizar prioridades, insere entradas novas e ignora as antigas quando
+   saem da fila (vetor "closed").
+
+4) Vizinhos: as 8 células em volta. Uma diagonal só é aceita se as DUAS
+   células ortogonais adjacentes também forem vazias, então o caminho nunca
+   corta o canto de uma parede.
+
+5) Ao fechar a célula de destino, reconstrói o caminho seguindo o vetor
+   "parent" do fim até o início e inverte. Cada ponto é o CENTRO da célula
+   em pixels: ((col + 0.5) * TILE_SIZE, (row + 0.5) * TILE_SIZE). O primeiro
+   ponto é a célula de início e o último a de destino. Se o destino não for
+   alcançado, retorna vazio.

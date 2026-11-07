@@ -18,6 +18,7 @@ add_executable(tests
   Dungeon2DTest.cpp
   TileMapTest.cpp
   BehaviorTreeTest.cpp
+  PathFindTest.cpp
   ${SRC_DIR}/Vector2D.cpp
   ${SRC_DIR}/Transform2D.cpp
   ${SRC_DIR}/Collision2D.cpp
@@ -25,6 +26,7 @@ add_executable(tests
   ${SRC_DIR}/Dungeon2D.cpp
   ${SRC_DIR}/TileMap.cpp
   ${SRC_DIR}/BehaviorTree.cpp
+  ${SRC_DIR}/PathFind.cpp
 )
 target_include_directories(tests PRIVATE ${SRC_DIR})
 target_compile_options(tests PRIVATE -Wall -Wextra -Wpedantic)
