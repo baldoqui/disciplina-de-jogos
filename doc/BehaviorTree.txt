@@ -1,0 +1,22 @@
+BEHAVIORTREE.CPP - DESCRIÇÃO DA IMPLEMENTAÇÃO
+=============================================
+
+Árvore SEM ESTADO: cada tick reavalia tudo a partir da raiz usando só o
+contexto recebido (lista de pares nome -> inteiro).
+
+ConditionNode: procura o nome no contexto (std::find_if). Sucesso se
+encontrar e o valor for diferente de zero; nome ausente conta como falso.
+Não carrega comando.
+
+ActionNode: sempre sucesso, carregando sua string de comando.
+
+SequenceNode: avalia os filhos da esquerda para a direita. No primeiro filho
+que falhar, retorna falha (sem comando). Se todos derem certo, retorna
+sucesso com o ÚLTIMO comando não vazio produzido pelos filhos.
+
+SelectorNode: avalia os filhos da esquerda para a direita e retorna o
+resultado do primeiro que tiver sucesso (com o comando dele). Se todos
+falharem, retorna falha.
+
+BehaviorTree::tick(): avalia a raiz; devolve o comando se a raiz teve
+sucesso, ou "" (nenhum comando neste tick) se falhou ou se não há raiz.

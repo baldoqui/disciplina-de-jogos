@@ -1,0 +1,8 @@
+ENTITY.CPP - DESCRIÇÃO DA IMPLEMENTAÇÃO
+=======================================
+
+Entity é uma struct simples definida inteiramente no Entity.hpp: um
+RigidBody2D (movimento), um Collision2D (forma), a flag active e o id.
+O único método, bounds(), é inline e só chama collision.bounds(body.position).
+
+O Entity.cpp apenas inclui o cabeçalho, para manter um .cpp por classe.

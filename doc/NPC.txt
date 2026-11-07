@@ -1,0 +1,15 @@
+NPC.CPP - DESCRIÇÃO DA IMPLEMENTAÇÃO
+====================================
+
+Segue a versão do NPC.hpp enviada em 31/out (classe com textura, sprite,
+RigidBody2D, Collision2D, active e id).
+
+sprite(path): carrega a imagem em m_texture com loadFromFile (SFML 2.x).
+Se falhar, escreve uma mensagem de erro em std::cerr e encerra o programa
+na hora com std::exit(EXIT_FAILURE), como pede o contrato. Se der certo,
+associa o sprite à textura com setTexture(m_texture, true); o "true" reajusta
+o retângulo do sprite para a imagem inteira.
+
+Cuidado: o sprite guarda um ponteiro para m_texture, então um NPC não deve
+ser copiado depois de carregar a imagem (a cópia apontaria para a textura do
+original).
