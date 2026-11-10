@@ -90,6 +90,10 @@ bool TileMap::loadCSV(const std::string &path) {
   std::string line;
 
   while (std::getline(in, line)) {
+    // Files saved on Windows end each line with "\r\n".
+    if (!line.empty() && line.back() == '\r')
+      line.pop_back();
+
     std::vector<int> row;
     std::string token;
     std::istringstream fields(line);

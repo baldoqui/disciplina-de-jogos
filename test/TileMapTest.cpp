@@ -155,6 +155,17 @@ TEST(TileMap, LoadCSVWithoutFinalNewline) {
   EXPECT_EQ(m.at(1, 1), 0);
 }
 
+TEST(TileMap, LoadCSVWithWindowsLineEndings) {
+  const TempFile f("tilemap_crlf.csv");
+  f.write("0,1\r\n1,0\r\n");
+  TileMap m;
+  ASSERT_TRUE(m.loadCSV(f.path()));
+  EXPECT_EQ(m.width(), 2);
+  EXPECT_EQ(m.height(), 2);
+  EXPECT_EQ(m.at(1, 0), 1);
+  EXPECT_EQ(m.at(1, 1), 0);
+}
+
 TEST(TileMap, SaveCSVFailsOnBadPath) {
   EXPECT_FALSE(smallMap().saveCSV("/nonexistent-dir/x/y.csv"));
 }
@@ -175,7 +186,7 @@ TEST(TileMap, LoadCSVRejectsMalformedAndLeavesMapUnchanged) {
       "1,x\n",          // not a number
       "1,0\n\n0,1\n",   // blank line
       "1;0\n",          // wrong separator
-      "1,0\r\n0,1\r\n", // CRLF
+      "1,0\r\r\n",      // stray carriage return
   };
   int i = 0;
   for (const char *contents : bad) {
